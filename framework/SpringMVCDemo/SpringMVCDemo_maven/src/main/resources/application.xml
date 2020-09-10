@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/task
+           http://www.springframework.org/schema/task/spring-task.xsd">
+
+	<context:annotation-config />
+	<context:component-scan base-package="service dao" />
+	<task:annotation-driven/> 
+	<!--定时任务 注解支持  -->
+	
+
+
+	<!-- <bean id="taskService" class="service.impl.TaskService"></bean> -->
+	<!-- <task:scheduled-tasks> -->
+		<!-- <task:scheduled ref="taskService" method="task01" initial-delay="1000" fixed-delay="5000" /> -->
+		<!--initial-delay="" 首次间隔   -->
+		<!--使用 cron 设定  定时时间  -->
+		<!-- <task:scheduled ref="taskService" method="task02" cron="0 55 13 * * ?"/> -->
+		<!-- 0 50 14 * * ? ?代表 任意一天 即为 每天14点 50分开始 -->
+	<!-- </task:scheduled-tasks> -->
+
+
+
+
+</beans>
