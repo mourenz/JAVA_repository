@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="14beca87-db64-4629-ad64-1dbcc74a4438" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../MybatisDemo/MyBatisDemo/MyBatisDemo.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MybatisDemo/MyBatisDemo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MybatisDemo/MyBatisDemo/pom.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="D:/apche_maven_location/apache-maven-3.6.0" />
+        <option name="userSettingsFile" value="D:\apche_maven_location\apache-maven-3.6.0\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1jPQGWgEuOUg9mtrm9qrP1r3tgj" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="14beca87-db64-4629-ad64-1dbcc74a4438" name="Default Changelist" comment="" />
+      <created>1603703151821</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1603703151821</updated>
+      <workItem from="1603703158325" duration="141000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1159" height="255" key="GridCell.Tab.0.bottom" timestamp="1603703301491">
+      <screen x="0" y="0" width="1202" height="1024" />
+    </state>
+    <state width="1159" height="255" key="GridCell.Tab.0.bottom/0.0.1202.1024@0.0.1202.1024" timestamp="1603703301491" />
+    <state width="1159" height="255" key="GridCell.Tab.0.center" timestamp="1603703301491">
+      <screen x="0" y="0" width="1202" height="1024" />
+    </state>
+    <state width="1159" height="255" key="GridCell.Tab.0.center/0.0.1202.1024@0.0.1202.1024" timestamp="1603703301491" />
+    <state width="1159" height="255" key="GridCell.Tab.0.left" timestamp="1603703301490">
+      <screen x="0" y="0" width="1202" height="1024" />
+    </state>
+    <state width="1159" height="255" key="GridCell.Tab.0.left/0.0.1202.1024@0.0.1202.1024" timestamp="1603703301490" />
+    <state width="1159" height="255" key="GridCell.Tab.0.right" timestamp="1603703301491">
+      <screen x="0" y="0" width="1202" height="1024" />
+    </state>
+    <state width="1159" height="255" key="GridCell.Tab.0.right/0.0.1202.1024@0.0.1202.1024" timestamp="1603703301491" />
+    <state x="0" y="118" key="new project wizard" timestamp="1603703299991">
+      <screen x="0" y="0" width="1202" height="1024" />
+    </state>
+    <state x="0" y="118" key="new project wizard/0.0.1202.1024@0.0.1202.1024" timestamp="1603703299991" />
+  </component>
+</project>

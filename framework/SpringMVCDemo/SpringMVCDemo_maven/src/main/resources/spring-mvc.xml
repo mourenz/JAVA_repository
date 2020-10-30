@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!--&lt;!&ndash;这个是处理器映射器 即为根据url 去访问 bean 中的 id或者name 找打Handle&ndash;&gt;-->
+    <!--<bean  class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>-->
+    <!--&lt;!&ndash;这个为处理器设配器  即配置请求的方法 即为handle内的handleRequest()方法&ndash;&gt;-->
+    <!--<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>-->
+    <!--&lt;!&ndash;配置视图解析器&ndash;&gt;-->
+    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"/>-->
+
+    <!--<bean id="/hello" class="web.HelloSpringMVC"/>-->
+
+<!--MVC 注解解析器 包括注册 RequestMappingHandleMapping RequestMappingAdaapter 以及ExceptionHandlerExceptionResolver-->
+    <mvc:annotation-driven/>
+
+    <context:component-scan base-package="web" use-default-filters="false">
+        <!--只扫描控制器-->
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"></context:include-filter>
+    </context:component-scan>
+
+    <!--处理静态资源请求(交由Tomcat处理)[tomcat 处理静态资源 是 defaultServlet ]-->
+    <mvc:default-servlet-handler/>
+    <!-- 自定义 静态资源处理规则 -->
+   <!-- <mvc:resources location="classpath:/static/" mapping="/**"/>-->
+    
+    <!--配置前端试图解析器-->
+    <!--return String 时 跳转视图时 会加上这里的前后缀-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/"/><!--配置前缀-->
+        <property name="suffix" value=".jsp"/><!--配置后缀-->
+    </bean>
+
+    <!--包含其他的配置-->
+    <!-- <import resource="classpath:application.xml"/> -->
+
+</beans>

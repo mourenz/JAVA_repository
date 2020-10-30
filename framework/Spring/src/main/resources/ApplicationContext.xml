@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!--注解开发 本质一样 IOC都会生成相关的bean对象-->
+    <context:component-scan base-package="service dao"/>
+
+
+    <!--测试AutoWried 注入机制-->
+    <bean id="money1" class="domain.Money"></bean>
+    <bean id="money2" class="domain.Money"></bean>
+
+    <!-- 必须开启 配置事务 注解 指定事务管理器 即为Spring 提供的事务-->
+    <tx:annotation-driven transaction-manager="txManager"/>
+
+    <!--    引入 数据库 配置文件 -->
+    <context:property-placeholder location="db.properties"/>
+    <!--配置数据源-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="url" value="${jdbc.jdbcUrl}"/>
+        <property name="username" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="driverClassName" value="${jdbc.driverClass}"/>
+        <!-- 配置初始化大小-->
+        <property name="initialSize" value="2"/>
+        <property name="maxActive" value="20"/>
+    </bean>
+
+    <!--    使用JdbcTemplate-->
+    <bean id="jdbcTemplate" class="dao.JdbcTemplate.JdbcTemplateDao">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <!--配置 spring与mybatis整合-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 指定连接池-->
+        <property name="dataSource" ref="dataSource"></property>
+        <!--指定mybatis全局配置文件的位置-->
+        <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+        <!--指定mybatis，mapper文件的位置-->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"></property>
+    </bean>
+    <!--配置Mapper扫描器，即为将Mapper接口的实现类加入到ioc容器中-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--扫描所有的dao接口实现，加入到ioc容器中-->
+        <property name="basePackage" value="dao"></property>
+    </bean>
+
+    <!--    temp-->
+    <bean id="mapperFactoryBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+        <property name="mapperInterface" value="dao.MoneyMapper"/>
+    </bean>
+
+
+    <!--自定义 事务(模拟)  模拟 -->
+    <bean id="tx" class="transaction.Transaction"/>
+
+
+    <!--aop 面向切面编程 -->
+    <!--pointcut 切入点 表示 需要哪些类 中哪些方法-->
+    <!--aspect 切面 == 切入时机和增强(advice)-->
+
+
+    <!--aop配置-->  <!--自定义事务配置-->
+    <aop:config>
+        <!--切入点-->
+        <!--   * service..*.*(..) 表示 对 service的子包 包含本身的 所有类和所有 返回值为任意的方法-->
+        <aop:pointcut id="service" expression="execution(* service..*.*(..))"></aop:pointcut>
+        <!--advice 增强-->
+        <aop:aspect ref="tx"> <!-- aspect(切面) == advice[what+when] + pointCut[where]-->
+            <!--前置增强  即为 在切入点的 代码前执行-->
+            <aop:before method="before" pointcut-ref="service"/>
+
+            <!--正常增强 返回值前 执行 -->
+            <aop:after-returning method="commit" pointcut-ref="service"/>
+
+            <!--最终增强 此代码会 类似 finally{}-->
+            <aop:after method="close" pointcut-ref="service"/>
+
+            <!--异常增强 发生异常 类似 catch(){} 处理-->
+            <aop:after-throwing method="rollback" pointcut-ref="service" throwing="ex"/>
+
+            <!--环绕增强-->
+            <!--            <aop:around method="aroundTran" pointcut-ref="service"/>-->
+        </aop:aspect>
+    </aop:config>
+
+
+    <!--    使用Spring 的事务管理器 -->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--需要加事务控制业务方法的方法-->
+    <tx:advice id="tx-advice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="transt" propagation="REQUIRED"/><!-- method ="xxx" 为业务需要事务的方法-->
+            <tx:method name="find*" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!--    匹配 切入点 和增强方法时机-->
+    <aop:config>
+        <aop:pointcut id="pointCut" expression="execution(* service..*.*(..))"/>
+        <aop:advisor advice-ref="tx-advice" pointcut-ref="pointCut"/>
+    </aop:config>
+
+
+</beans>
