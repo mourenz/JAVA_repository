@@ -1,2 +1,0 @@
-# SpringMVCDemo
-SpringMVC maven版
