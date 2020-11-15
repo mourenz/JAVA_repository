@@ -1,0 +1,14 @@
+server:
+  port: 8089
+
+spring:
+  datasource:
+    ssm:
+      driver-class-name: com.mysql.jdbc.Driver
+      password: zqg9721..
+      url: jdbc:mysql://182.254.244.35:3306/webscoket?serverTimezone=GMT%2B8
+      username: root
+
+logging:
+  config: classpath:log4j2.xml
+
